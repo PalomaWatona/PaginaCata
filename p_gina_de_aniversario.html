@@ -1,0 +1,909 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>365 Días Contigo - Nuestro Primer Año</title>
+  
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  
+  <!-- Google Fonts: Cormorant Garamond (Elegante serif), Caveat (Manuscrita vintage), Inter (Lectura) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@400;600;700&family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400&family=Inter:wght@300;400;500;600&family=Special+Elite&display=swap" rel="stylesheet">
+  
+  <style>
+    /* Estilos Vintage y Tipografías */
+    .font-serif-vintage {
+      font-family: 'Cormorant Garamond', Georgia, serif;
+    }
+    .font-handwriting {
+      font-family: 'Caveat', cursive;
+    }
+    .font-typewriter {
+      font-family: 'Special Elite', monospace;
+    }
+    body {
+      font-family: 'Inter', sans-serif;
+      background-color: #faf5ee;
+      color: #3f2e24;
+      overflow-x: hidden;
+    }
+
+    /* Fondo texturizado papel suave y cálido */
+    .paper-texture {
+      background-color: #fdfbf7;
+      background-image: radial-gradient(#d3c1a5 0.75px, transparent 0.75px);
+      background-size: 24px 24px;
+    }
+
+    /* Efecto Polaroid */
+    .polaroid-card {
+      background: #ffffff;
+      box-shadow: 0 10px 25px -5px rgba(60, 40, 25, 0.15), 0 8px 10px -6px rgba(60, 40, 25, 0.1);
+      transition: all 0.35s cubic-bezier(0.165, 0.84, 0.44, 1);
+    }
+    .polaroid-card:hover {
+      transform: translateY(-8px) scale(1.02) rotate(0deg) !important;
+      box-shadow: 0 20px 30px -10px rgba(60, 40, 25, 0.25);
+      z-index: 20;
+    }
+
+    /* Efecto cinta adhesiva vintage */
+    .washi-tape {
+      background: rgba(220, 195, 165, 0.55);
+      border-left: 2px dashed rgba(255, 255, 255, 0.4);
+      border-right: 2px dashed rgba(255, 255, 255, 0.4);
+      box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+    }
+
+    /* Animación del sobre de la carta */
+    .envelope-flap {
+      transform-origin: top;
+      transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+    .letter-paper {
+      transition: transform 0.7s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.5s ease;
+    }
+
+    /* Canvas de partículas detrás del contenido */
+    #particles-canvas {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      pointer-events: none;
+      z-index: 1;
+    }
+    
+    /* Scrollbar personalizada suave */
+    ::-webkit-scrollbar {
+      width: 8px;
+    }
+    ::-webkit-scrollbar-track {
+      background: #f4ede2;
+    }
+    ::-webkit-scrollbar-thumb {
+      background: #d4bc9f;
+      border-radius: 4px;
+    }
+    ::-webkit-scrollbar-thumb:hover {
+      background: #bfa484;
+    }
+  </style>
+</head>
+<body class="paper-texture min-h-screen relative selection:bg-amber-200 selection:text-amber-950">
+
+  <!-- Canvas para luciérnagas y destellos dorados -->
+  <canvas id="particles-canvas"></canvas>
+
+  <!-- Barra de utilidades flotante superior (Reproductor de música sutil & Estado) -->
+  <div class="fixed top-4 right-4 sm:top-6 sm:right-6 z-50 flex items-center gap-3">
+    <!-- Botón reproductor de música sutil con sintetizador Tone.js o audio -->
+    <button id="musicToggleBtn" class="flex items-center gap-2.5 px-4 py-2 bg-white/90 backdrop-blur-md border border-[#e2d5c3] shadow-md rounded-full text-xs sm:text-sm font-medium text-[#5c4033] hover:bg-[#fffcf7] hover:shadow-lg transition-all active:scale-95">
+      <span id="musicIcon" class="inline-block animate-pulse text-amber-700">
+        <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 fill-current" viewBox="0 0 24 24"><path d="M12 3v10.55c-.59-.34-1.27-.55-2-.55-2.21 0-4 1.79-4 4s1.79 4 4 4 4-1.79 4-4V7h4V3h-6z"/></svg>
+      </span>
+      <span id="musicLabel">Nuestra Canción</span>
+    </button>
+  </div>
+
+  <!-- Contenedor Principal -->
+  <main class="relative z-10 max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-12 md:py-20 flex flex-col gap-24 sm:gap-32">
+
+    <!-- SECCIÓN 1: PORTADA Y CONTADOR DE AMOR EN VIVO -->
+    <header class="text-center relative pt-8 pb-4 flex flex-col items-center">
+      <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#f3e7d6] text-[#78543e] text-xs uppercase tracking-widest font-semibold mb-6 border border-[#e5d4be] shadow-sm">
+        <svg class="w-3.5 h-3.5 text-rose-600 fill-current animate-bounce" viewBox="0 0 24 24"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>
+        <span>Primer Aniversario &bull; 365 Días</span>
+      </div>
+
+      <h1 class="text-4xl sm:text-6xl md:text-7xl font-serif-vintage font-bold tracking-tight text-[#41271b] leading-tight mb-4">
+        365 Días a Tu Lado
+      </h1>
+      
+      <!-- Subtítulo con estilo caligráfico -->
+      <p class="font-handwriting text-2xl sm:text-3xl text-[#845c43] max-w-xl mx-auto mb-10 leading-relaxed">
+        "El primer año del resto de nuestras vidas, gracias por ser mi lugar favorito en el mundo."
+      </p>
+
+      <!-- Contador en tiempo real vintage -->
+      <div class="w-full max-w-3xl bg-white/70 backdrop-blur-sm border border-[#e5d5c0] rounded-2xl p-6 sm:p-8 shadow-sm">
+        <div class="text-xs font-semibold uppercase tracking-wider text-[#8b6952] mb-4 flex items-center justify-center gap-2">
+          <span>Tiempo Construyendo Nuestra Historia</span>
+        </div>
+        
+        <div class="grid grid-cols-2 sm:grid-cols-4 gap-4 text-center">
+          <div class="p-3 bg-[#fdf9f3] rounded-xl border border-[#ede1d1]">
+            <div id="counter-days" class="text-3xl sm:text-5xl font-serif-vintage font-bold text-[#5c3726]">365</div>
+            <div class="text-xs uppercase tracking-wider text-[#937561] font-medium mt-1">Días</div>
+          </div>
+          <div class="p-3 bg-[#fdf9f3] rounded-xl border border-[#ede1d1]">
+            <div id="counter-hours" class="text-3xl sm:text-5xl font-serif-vintage font-bold text-[#5c3726]">00</div>
+            <div class="text-xs uppercase tracking-wider text-[#937561] font-medium mt-1">Horas</div>
+          </div>
+          <div class="p-3 bg-[#fdf9f3] rounded-xl border border-[#ede1d1]">
+            <div id="counter-minutes" class="text-3xl sm:text-5xl font-serif-vintage font-bold text-[#5c3726]">00</div>
+            <div class="text-xs uppercase tracking-wider text-[#937561] font-medium mt-1">Minutos</div>
+          </div>
+          <div class="p-3 bg-[#fdf9f3] rounded-xl border border-[#ede1d1]">
+            <div id="counter-seconds" class="text-3xl sm:text-5xl font-serif-vintage font-bold text-[#8d4233]">00</div>
+            <div class="text-xs uppercase tracking-wider text-[#937561] font-medium mt-1">Segundos</div>
+          </div>
+        </div>
+
+        <!-- Indicador de fecha personalizable -->
+        <p class="text-center text-xs text-[#8f725e] mt-4 font-typewriter">
+          Inicio: <span id="anniversary-date-display" class="font-bold underline decoration-amber-300">12 de Octubre, 2025</span> &mdash; ¡Y contando cada latido!
+        </p>
+      </div>
+    </header>
+
+    <!-- SECCIÓN 2: CARTA INTERACTIVA EN SOBRE VINTAGE -->
+    <section class="flex flex-col items-center">
+      <div class="text-center mb-8">
+        <span class="text-xs uppercase tracking-widest text-[#93725b] font-bold">Un Mensaje Desde Mi Corazón</span>
+        <h2 class="text-3xl sm:text-4xl font-serif-vintage font-bold text-[#442718]">Mi Carta Para Ti</h2>
+        <p class="text-sm text-[#745743] mt-1 font-typewriter">Haz clic en el sello para desplegar lo que siento por ti</p>
+      </div>
+
+      <!-- Sobre Interactivo -->
+      <div class="w-full max-w-2xl relative">
+        <div id="envelopeWrapper" class="bg-[#f0e3d1] border border-[#d6c4ae] rounded-xl p-6 sm:p-10 shadow-lg relative overflow-hidden transition-all duration-500">
+          
+          <!-- Sello de cera interactivo -->
+          <div id="waxSealBtn" role="button" tabindex="0" class="cursor-pointer mx-auto w-16 h-16 rounded-full bg-[#8c2d28] border-2 border-[#b5453f] flex items-center justify-center text-white shadow-md hover:scale-105 active:scale-95 transition-all z-20 relative group">
+            <svg class="w-8 h-8 text-rose-100 group-hover:rotate-12 transition-transform" fill="currentColor" viewBox="0 0 24 24"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>
+            <span class="absolute -bottom-6 text-[11px] text-[#6d4d38] font-bold tracking-wider uppercase font-typewriter whitespace-nowrap">Abrir carta</span>
+          </div>
+
+          <!-- Contenido de la Carta (Oculto al inicio / Se revela con animación) -->
+          <div id="letterContent" class="hidden mt-8 pt-8 border-t border-[#d8c3ab] font-serif-vintage text-base sm:text-lg text-[#3e271c] leading-relaxed bg-[#fefbf6] p-6 sm:p-10 rounded-lg shadow-inner relative border-l-4 border-l-[#caa37d]">
+            
+            <div class="washi-tape absolute -top-3 left-1/2 -translate-x-1/2 w-32 h-6 rounded-sm opacity-70"></div>
+            
+            <div class="flex justify-between items-center mb-6 text-sm text-[#8a6850] font-typewriter">
+              <span>Para: Mi persona favorita</span>
+              <span>1 Año Juntos</span>
+            </div>
+
+            <!-- CUERPO DE LA CARTA PERSONALIZABLE -->
+            <div class="space-y-4 text-justify font-serif-vintage text-lg sm:text-xl">
+              <p class="font-handwriting text-3xl text-[#78432a]">Mi amor,</p>
+              
+              <p>
+                Parece que fue ayer cuando empezamos a escribir esta historia, pero hoy ya se cumplen 365 días desde que decidimos caminar juntos. Mirar atrás y ver todo lo que hemos vivido me llena de una gratitud inmensa que difícilmente cabe en palabras.
+              </p>
+              
+              <p>
+                Gracias por cada café compartido, por cada viaje inesperado, por abrazarme fuerte cuando el mundo afuera se sentía demasiado ruidoso, y por hacer de cualquier tarde ordinaria un momento que no cambiaría por nada. Me encanta cómo me haces reír, la calma que me transmites con solo sostener mi mano y cómo somos un equipo en todo momento.
+              </p>
+              
+              <p>
+                Este año a tu lado ha sido mi aventura preferida. Y lo más lindo de todo esto es saber que esto es apenas el prólogo de todo lo que aún soñamos construir.
+              </p>
+
+              <p class="pt-4 font-handwriting text-3xl text-right text-[#78432a]">
+                Con todo mi amor, siempre.<br>
+                <span class="text-xl font-normal text-[#5a3b2b]">(Tu persona favorita)</span>
+              </p>
+            </div>
+
+            <div class="mt-8 pt-4 border-t border-[#eedcc8] flex justify-end">
+              <button id="toggleLetterEditBtn" class="text-xs text-[#8f6e57] hover:text-[#523321] underline font-typewriter">
+                [Editar esta carta en vivo]
+              </button>
+            </div>
+
+            <!-- Editor de texto en vivo para la carta -->
+            <div id="letterEditForm" class="hidden mt-4 pt-4 border-t border-dashed border-[#d3beab]">
+              <label class="block text-xs font-semibold text-[#664632] mb-1 font-typewriter">Escribe tu propia carta personalizada:</label>
+              <textarea id="letterCustomInput" rows="7" class="w-full p-3 text-sm bg-white border border-[#cbba9f] rounded-lg focus:outline-none focus:ring-2 focus:ring-amber-500 font-serif-vintage" placeholder="Escribe aquí tus sentimientos..."></textarea>
+              <button id="saveLetterBtn" class="mt-2 px-4 py-1.5 bg-[#69422b] text-white text-xs rounded font-medium hover:bg-[#523321]">Guardar Cambios</button>
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECCIÓN 3: GALERÍA DE RECUERDOS ESTILO POLAROID -->
+    <section>
+      <div class="text-center mb-12">
+        <span class="text-xs uppercase tracking-widest text-[#93725b] font-bold">Nuestra Galería de Instantes</span>
+        <h2 class="text-3xl sm:text-4xl font-serif-vintage font-bold text-[#442718]">Momentos que Congelaron el Tiempo</h2>
+        <p class="text-sm text-[#745743] mt-1 font-typewriter">Pasa el cursor por las fotos para revivir la anécdota de ese día</p>
+      </div>
+
+      <!-- Grid de Polaroids -->
+      <div id="polaroidGrid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 sm:gap-10">
+        
+        <!-- Polaroid 1 -->
+        <article class="polaroid-card p-4 rounded-sm rotate-[-2deg] flex flex-col justify-between cursor-pointer group" onclick="openPhotoModal(0)">
+          <div class="w-full aspect-[4/3] bg-amber-50 overflow-hidden rounded-xs relative">
+            <img src="https://images.unsplash.com/photo-1516589178581-6cd7833ae3b2?q=80&w=800&auto=format&fit=crop" alt="Nuestra primera cita" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+            <span class="absolute top-2 right-2 bg-black/60 text-white text-[10px] px-2 py-0.5 rounded-full font-typewriter">Día 1</span>
+          </div>
+          <div class="pt-4 pb-1 text-center">
+            <h3 class="font-handwriting text-2xl text-[#392419]">El día que todo comenzó</h3>
+            <p class="text-xs text-[#82614b] font-typewriter mt-0.5">12 de Octubre &bull; El café de la esquina</p>
+            <p class="text-xs text-[#523e31] mt-2 line-clamp-2 italic">Estábamos nerviosos, pedimos dos cafés y nos quedamos hablando hasta que cerraron el lugar...</p>
+          </div>
+        </article>
+
+        <!-- Polaroid 2 -->
+        <article class="polaroid-card p-4 rounded-sm rotate-[1.5deg] flex flex-col justify-between cursor-pointer group" onclick="openPhotoModal(1)">
+          <div class="w-full aspect-[4/3] bg-amber-50 overflow-hidden rounded-xs relative">
+            <img src="https://images.unsplash.com/photo-1469854523086-cc02fe5d8800?q=80&w=800&auto=format&fit=crop" alt="Nuestro primer viaje" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+            <span class="absolute top-2 right-2 bg-black/60 text-white text-[10px] px-2 py-0.5 rounded-full font-typewriter">Mes 4</span>
+          </div>
+          <div class="pt-4 pb-1 text-center">
+            <h3 class="font-handwriting text-2xl text-[#392419]">Nuestra primera escapada</h3>
+            <p class="text-xs text-[#82614b] font-typewriter mt-0.5">Febrero &bull; Perdidos en la carretera</p>
+            <p class="text-xs text-[#523e31] mt-2 line-clamp-2 italic">Nos equivocamos tres veces de salida en la autopista y cantamos a todo volumen toda la tarde.</p>
+          </div>
+        </article>
+
+        <!-- Polaroid 3 -->
+        <article class="polaroid-card p-4 rounded-sm rotate-[-1deg] flex flex-col justify-between cursor-pointer group" onclick="openPhotoModal(2)">
+          <div class="w-full aspect-[4/3] bg-amber-50 overflow-hidden rounded-xs relative">
+            <img src="https://images.unsplash.com/photo-1518199266791-5375a83190b7?q=80&w=800&auto=format&fit=crop" alt="Tarde de risas" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+            <span class="absolute top-2 right-2 bg-black/60 text-white text-[10px] px-2 py-0.5 rounded-full font-typewriter">Mes 7</span>
+          </div>
+          <div class="pt-4 pb-1 text-center">
+            <h3 class="font-handwriting text-2xl text-[#392419]">Cocinar sin quemar nada</h3>
+            <p class="text-xs text-[#82614b] font-typewriter mt-0.5">Mayo &bull; Noche de pasta en casa</p>
+            <p class="text-xs text-[#523e31] mt-2 line-clamp-2 italic">Llenamos la cocina de harina, pero la salsa nos quedó como de restaurante con estrella Michelin.</p>
+          </div>
+        </article>
+
+      </div>
+
+      <!-- Botón para añadir foto propia rápidamente -->
+      <div class="mt-8 text-center">
+        <button id="addMemoryTriggerBtn" class="inline-flex items-center gap-2 px-4 py-2 text-xs font-semibold uppercase tracking-wider text-[#79543e] hover:text-[#41271b] border border-dashed border-[#b89f84] rounded-lg hover:border-[#6d4b35] transition-colors">
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"/></svg>
+          Personalizar o Agregar Otra Foto
+        </button>
+        <!-- Formulario flotante para agregar/cambiar fotos -->
+        <div id="addPhotoForm" class="hidden mt-4 max-w-md mx-auto p-4 bg-white/90 border border-[#d6c4ae] rounded-xl text-left shadow-sm">
+          <div class="text-xs font-bold text-[#573926] mb-2 font-typewriter">Agrega un recuerdo a la galería:</div>
+          <div class="space-y-2">
+            <input type="text" id="newPhotoTitle" placeholder="Título (ej: Atardecer en el mirador)" class="w-full text-xs p-2 border border-[#d2c0aa] rounded">
+            <input type="text" id="newPhotoDate" placeholder="Fecha y Lugar (ej: Julio &bull; Playa)" class="w-full text-xs p-2 border border-[#d2c0aa] rounded">
+            <input type="text" id="newPhotoUrl" placeholder="URL de la imagen (o pega enlace de Imgur/Google)" class="w-full text-xs p-2 border border-[#d2c0aa] rounded">
+            <textarea id="newPhotoDesc" placeholder="Breve historia de ese momento..." rows="2" class="w-full text-xs p-2 border border-[#d2c0aa] rounded"></textarea>
+            <button id="submitNewPhotoBtn" class="w-full py-1.5 bg-[#754b32] text-white text-xs font-medium rounded hover:bg-[#5a3622]">Guardar en la Colección</button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECCIÓN 4: LÍNEA DE TIEMPO (EL VIAJE DE NUESTROS 12 MESES) -->
+    <section>
+      <div class="text-center mb-12">
+        <span class="text-xs uppercase tracking-widest text-[#93725b] font-bold">12 Capítulos Inolvidables</span>
+        <h2 class="text-3xl sm:text-4xl font-serif-vintage font-bold text-[#442718]">El Camino de Nuestros 12 Meses</h2>
+        <p class="text-sm text-[#745743] mt-1 font-typewriter">Un hito especial por cada mes que hemos compartido</p>
+      </div>
+
+      <div class="relative border-l-2 border-[#d9c7b0] ml-4 sm:ml-32 space-y-10 py-4">
+
+        <!-- Mes 1 -->
+        <div class="relative pl-6 sm:pl-8 group">
+          <div class="absolute -left-[9px] top-1.5 w-4 h-4 rounded-full bg-[#8c2d28] border-4 border-[#faf5ee] group-hover:scale-125 transition-transform"></div>
+          <span class="font-typewriter text-xs font-bold text-[#8c2d28] uppercase tracking-wider">Mes 01 &bull; El Inicio</span>
+          <h3 class="text-xl font-serif-vintage font-bold text-[#402619] mt-0.5">La primera chispa</h3>
+          <p class="text-sm text-[#664936] mt-1 leading-relaxed">
+            Ese primer mensaje que parecía casual y se convirtió en una conversación de cinco horas. Supimos de inmediato que esto no era cualquier cosa.
+          </p>
+        </div>
+
+        <!-- Mes 3 -->
+        <div class="relative pl-6 sm:pl-8 group">
+          <div class="absolute -left-[9px] top-1.5 w-4 h-4 rounded-full bg-[#bf8252] border-4 border-[#faf5ee] group-hover:scale-125 transition-transform"></div>
+          <span class="font-typewriter text-xs font-bold text-[#bf8252] uppercase tracking-wider">Mes 03 &bull; Confianza</span>
+          <h3 class="text-xl font-serif-vintage font-bold text-[#402619] mt-0.5">Conociendo a tus amigos</h3>
+          <p class="text-sm text-[#664936] mt-1 leading-relaxed">
+            La primera reunión donde ya no éramos dos personas saliendo, sino nosotros integrándonos en el mundo del otro de manera natural.
+          </p>
+        </div>
+
+        <!-- Mes 6 -->
+        <div class="relative pl-6 sm:pl-8 group">
+          <div class="absolute -left-[9px] top-1.5 w-4 h-4 rounded-full bg-[#8c2d28] border-4 border-[#faf5ee] group-hover:scale-125 transition-transform"></div>
+          <span class="font-typewriter text-xs font-bold text-[#8c2d28] uppercase tracking-wider">Mes 06 &bull; Medio Año</span>
+          <h3 class="text-xl font-serif-vintage font-bold text-[#402619] mt-0.5">La mitad del camino hacia aquí</h3>
+          <p class="text-sm text-[#664936] mt-1 leading-relaxed">
+            Celebramos seis meses con una cena improvisada. Nos dimos cuenta de lo rápido que pasa el tiempo cuando estás al lado de la persona correcta.
+          </p>
+        </div>
+
+        <!-- Mes 9 -->
+        <div class="relative pl-6 sm:pl-8 group">
+          <div class="absolute -left-[9px] top-1.5 w-4 h-4 rounded-full bg-[#bf8252] border-4 border-[#faf5ee] group-hover:scale-125 transition-transform"></div>
+          <span class="font-typewriter text-xs font-bold text-[#bf8252] uppercase tracking-wider">Mes 09 &bull; Superando Días Difíciles</span>
+          <h3 class="text-xl font-serif-vintage font-bold text-[#402619] mt-0.5">Cuidarnos en las malas</h3>
+          <p class="text-sm text-[#664936] mt-1 leading-relaxed">
+            Cuando uno de los dos tuvo una semana pesada y el otro llegó con sopa y un abrazo que curó todo. Ahí reafirmamos lo que es ser un refugio.
+          </p>
+        </div>
+
+        <!-- Mes 12 -->
+        <div class="relative pl-6 sm:pl-8 group">
+          <div class="absolute -left-[9px] top-1.5 w-4 h-4 rounded-full bg-[#8c2d28] border-4 border-[#faf5ee] group-hover:scale-125 transition-transform"></div>
+          <span class="font-typewriter text-xs font-bold text-[#8c2d28] uppercase tracking-wider">Mes 12 &bull; Hoy</span>
+          <h3 class="text-xl font-serif-vintage font-bold text-[#402619] mt-0.5">¡Feliz Primer Aniversario!</h3>
+          <p class="text-sm text-[#664936] mt-1 leading-relaxed">
+            Miramos hacia atrás con el corazón lleno y hacia el frente con la ilusión de todos los años que todavía nos quedan por celebrar.
+          </p>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- SECCIÓN 5: NUESTRO AÑO EN CIFRAS -->
+    <section>
+      <div class="text-center mb-10">
+        <span class="text-xs uppercase tracking-widest text-[#93725b] font-bold">Pequeñas Grandes Cosas</span>
+        <h2 class="text-3xl sm:text-4xl font-serif-vintage font-bold text-[#442718]">Nuestro Año en Cifras</h2>
+        <p class="text-sm text-[#745743] mt-1 font-typewriter">Datos curiosos y tiernos de estos 365 días</p>
+      </div>
+
+      <div class="grid grid-cols-2 sm:grid-cols-4 gap-4">
+        <!-- Tarjeta 1 -->
+        <div class="bg-white/80 border border-[#dfceb9] p-5 rounded-xl text-center shadow-xs">
+          <div class="text-3xl sm:text-4xl font-serif-vintage font-bold text-[#8c2d28]">365</div>
+          <div class="text-xs text-[#5a3f2e] font-semibold mt-1">Días Amándote</div>
+          <div class="text-[11px] text-[#90735e] mt-1 italic font-typewriter">Sin saltarme ni uno solo</div>
+        </div>
+        <!-- Tarjeta 2 -->
+        <div class="bg-white/80 border border-[#dfceb9] p-5 rounded-xl text-center shadow-xs">
+          <div class="text-3xl sm:text-4xl font-serif-vintage font-bold text-[#bf8252]">+480</div>
+          <div class="text-xs text-[#5a3f2e] font-semibold mt-1">Horas de Llamadas</div>
+          <div class="text-[11px] text-[#90735e] mt-1 italic font-typewriter">"Duérmete tú primero..."</div>
+        </div>
+        <!-- Tarjeta 3 -->
+        <div class="bg-white/80 border border-[#dfceb9] p-5 rounded-xl text-center shadow-xs">
+          <div class="text-3xl sm:text-4xl font-serif-vintage font-bold text-[#8c2d28]">&infin;</div>
+          <div class="text-xs text-[#5a3f2e] font-semibold mt-1">Risas Incontrolables</div>
+          <div class="text-[11px] text-[#90735e] mt-1 italic font-typewriter">Por nuestros chistes internos</div>
+        </div>
+        <!-- Tarjeta 4 -->
+        <div class="bg-white/80 border border-[#dfceb9] p-5 rounded-xl text-center shadow-xs">
+          <div class="text-3xl sm:text-4xl font-serif-vintage font-bold text-[#bf8252]">52</div>
+          <div class="text-xs text-[#5a3f2e] font-semibold mt-1">Citas Románticas</div>
+          <div class="text-[11px] text-[#90735e] mt-1 italic font-typewriter">Y contando cada semana</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECCIÓN 6: CANCIONES QUE ME RECUERDAN A TI -->
+    <section>
+      <div class="text-center mb-10">
+        <span class="text-xs uppercase tracking-widest text-[#93725b] font-bold">Nuestra Banda Sonora</span>
+        <h2 class="text-3xl sm:text-4xl font-serif-vintage font-bold text-[#442718]">Canciones que Me Llevan a Ti</h2>
+        <p class="text-sm text-[#745743] mt-1 font-typewriter">Cada melodía tiene grabada una mirada o un recuerdo tuyo</p>
+      </div>
+
+      <div class="bg-white/75 border border-[#e2d5c3] rounded-2xl p-6 sm:p-8 max-w-3xl mx-auto shadow-sm space-y-4">
+        
+        <!-- Canción 1 -->
+        <div class="flex items-center justify-between p-3.5 rounded-xl bg-[#faf5ee] border border-[#eee2d2] hover:bg-[#f6ede0] transition-colors">
+          <div class="flex items-center gap-3.5">
+            <button class="play-song-btn w-9 h-9 rounded-full bg-[#8c2d28] text-white flex items-center justify-center shrink-0 shadow-xs hover:scale-105 active:scale-95 transition-all" data-frequency="440" data-title="Yellow - Coldplay">
+              <svg class="w-4 h-4 fill-current ml-0.5" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+            </button>
+            <div>
+              <h4 class="text-sm font-bold text-[#462d1f]">Yellow &bull; Coldplay</h4>
+              <p class="text-xs text-[#805e49] font-serif-vintage italic">"Me recuerda a cuando me dijiste que las estrellas brillaban diferente esa noche."</p>
+            </div>
+          </div>
+          <span class="text-[11px] font-typewriter text-[#9b7b65] hidden sm:block">Canción #1</span>
+        </div>
+
+        <!-- Canción 2 -->
+        <div class="flex items-center justify-between p-3.5 rounded-xl bg-[#faf5ee] border border-[#eee2d2] hover:bg-[#f6ede0] transition-colors">
+          <div class="flex items-center gap-3.5">
+            <button class="play-song-btn w-9 h-9 rounded-full bg-[#bf8252] text-white flex items-center justify-center shrink-0 shadow-xs hover:scale-105 active:scale-95 transition-all" data-frequency="523.25" data-title="Lover - Taylor Swift">
+              <svg class="w-4 h-4 fill-current ml-0.5" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+            </button>
+            <div>
+              <h4 class="text-sm font-bold text-[#462d1f]">Lover &bull; Taylor Swift</h4>
+              <p class="text-xs text-[#805e49] font-serif-vintage italic">"Sonaba bajito mientras manejábamos de regreso cantando juntos."</p>
+            </div>
+          </div>
+          <span class="text-[11px] font-typewriter text-[#9b7b65] hidden sm:block">Canción #2</span>
+        </div>
+
+        <!-- Canción 3 -->
+        <div class="flex items-center justify-between p-3.5 rounded-xl bg-[#faf5ee] border border-[#eee2d2] hover:bg-[#f6ede0] transition-colors">
+          <div class="flex items-center gap-3.5">
+            <button class="play-song-btn w-9 h-9 rounded-full bg-[#8c2d28] text-white flex items-center justify-center shrink-0 shadow-xs hover:scale-105 active:scale-95 transition-all" data-frequency="659.25" data-title="Until I Found You - Stephen Sanchez">
+              <svg class="w-4 h-4 fill-current ml-0.5" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+            </button>
+            <div>
+              <h4 class="text-sm font-bold text-[#462d1f]">Until I Found You &bull; Stephen Sanchez</h4>
+              <p class="text-xs text-[#805e49] font-serif-vintage italic">"Porque de verdad no sabía lo que me faltaba hasta que te conocí."</p>
+            </div>
+          </div>
+          <span class="text-[11px] font-typewriter text-[#9b7b65] hidden sm:block">Canción #3</span>
+        </div>
+
+        <!-- Barra inferior del reproductor con estado -->
+        <div class="mt-4 pt-3 border-t border-[#e8dac7] flex items-center justify-between text-xs text-[#8f6e57] font-typewriter">
+          <span id="nowPlayingText">Toca el botón 'play' para oír una nota dulce</span>
+          <span class="text-[11px] bg-[#f0e3d2] px-2 py-0.5 rounded text-[#714d36]">Audio Web Simulado</span>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- SECCIÓN 7: VALES DE AMOR (AÑO 2) & CÁPSULA DEL TIEMPO -->
+    <section class="grid grid-cols-1 md:grid-cols-2 gap-8">
+      
+      <!-- Vales canjeables -->
+      <div class="bg-white/80 border border-[#dfceb9] p-6 rounded-2xl shadow-xs">
+        <div class="text-xs font-bold text-[#94725d] font-typewriter uppercase tracking-wider mb-1">Promesas de Amor</div>
+        <h3 class="text-2xl font-serif-vintage font-bold text-[#442718] mb-4">Cupones para el Año 2</h3>
+        <p class="text-xs text-[#7c5e48] mb-4">Vales válidos por sonrisas, canjeables cuando tú quieras:</p>
+
+        <div class="space-y-3">
+          <!-- Cupón 1 -->
+          <div class="coupon-item border border-dashed border-[#cbba9f] p-3 rounded-lg flex items-center justify-between bg-[#fffefb]">
+            <div>
+              <div class="text-xs font-bold text-[#482c1f]">1. Cena sorpresa cocinada por mí</div>
+              <div class="text-[11px] text-[#866650] font-serif-vintage">Plato favorito + postre garantizado</div>
+            </div>
+            <button class="redeem-btn text-[11px] px-3 py-1 bg-[#8c2d28] text-white rounded font-medium hover:bg-[#6c221e] transition-colors" data-id="1">Canjear</button>
+          </div>
+
+          <!-- Cupón 2 -->
+          <div class="coupon-item border border-dashed border-[#cbba9f] p-3 rounded-lg flex items-center justify-between bg-[#fffefb]">
+            <div>
+              <div class="text-xs font-bold text-[#482c1f]">2. Día de maratón y cero obligaciones</div>
+              <div class="text-[11px] text-[#866650] font-serif-vintage">Películas, manta, comida a domicilio y paz</div>
+            </div>
+            <button class="redeem-btn text-[11px] px-3 py-1 bg-[#8c2d28] text-white rounded font-medium hover:bg-[#6c221e] transition-colors" data-id="2">Canjear</button>
+          </div>
+
+          <!-- Cupón 3 -->
+          <div class="coupon-item border border-dashed border-[#cbba9f] p-3 rounded-lg flex items-center justify-between bg-[#fffefb]">
+            <div>
+              <div class="text-xs font-bold text-[#482c1f]">3. Escapada espontánea de fin de semana</div>
+              <div class="text-[11px] text-[#866650] font-serif-vintage">Destino sorpresa a donde tú elijas</div>
+            </div>
+            <button class="redeem-btn text-[11px] px-3 py-1 bg-[#8c2d28] text-white rounded font-medium hover:bg-[#6c221e] transition-colors" data-id="3">Canjear</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Cápsula del tiempo con candado -->
+      <div class="bg-gradient-to-br from-[#faf4ec] to-[#f2e5d5] border border-[#dfceb9] p-6 rounded-2xl shadow-xs flex flex-col justify-between">
+        <div>
+          <div class="text-xs font-bold text-[#94725d] font-typewriter uppercase tracking-wider mb-1">Para Nuestro Futuro</div>
+          <h3 class="text-2xl font-serif-vintage font-bold text-[#442718] mb-2">Cápsula del Tiempo</h3>
+          <p class="text-xs text-[#7c5e48] leading-relaxed">
+            Una carta secreta guardada hoy que solo podrá abrirse cuando cumplamos nuestro segundo año de relación.
+          </p>
+        </div>
+
+        <div class="my-6 p-5 border border-[#dbc7b0] rounded-xl bg-white/60 text-center relative overflow-hidden">
+          <div class="inline-block p-3 rounded-full bg-[#f3e5d3] text-[#85593c] mb-2">
+            <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24"><path d="M18 8h-1V6c0-2.76-2.24-5-5-5S7 3.24 7 6v2H6c-1.1 0-2 .9-2 2v10c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V10c0-1.1-.9-2-2-2zm-6 9c-1.1 0-2-.9-2-2s.9-2 2-2 2 .9 2 2-.9 2-2 2zm3.1-9H8.9V6c0-1.71 1.39-3.1 3.1-3.1 1.71 0 3.1 1.39 3.1 3.1v2z"/></svg>
+          </div>
+          <div class="text-sm font-bold text-[#4b3121] font-serif-vintage">Sellado con candado de amor</div>
+          <div id="capsuleLockText" class="text-xs text-[#8c6c55] font-typewriter mt-1">Disponible: Próximo Aniversario</div>
+        </div>
+
+        <button id="openCapsuleAttemptBtn" class="w-full py-2 bg-[#694833] hover:bg-[#523522] text-white text-xs font-medium rounded-lg transition-colors">
+          Intentar Abrir Cápsula Secreta
+        </button>
+      </div>
+
+    </section>
+
+    <!-- SECCIÓN 8: CIERRE INTERACTIVO Y CELEBRACIÓN -->
+    <footer class="text-center pt-8 pb-16 border-t border-[#e2d5c4]">
+      <p class="font-handwriting text-3xl sm:text-4xl text-[#784934] mb-3">
+        "De todas las historias de amor en el mundo, la nuestra es mi preferida."
+      </p>
+      
+      <p class="text-xs text-[#886953] font-typewriter mb-8">
+        Creado con todo el corazón para celebrar nuestro 1er año juntos.
+      </p>
+
+      <!-- Botón de Confeti de Amor -->
+      <button id="celebrateBtn" class="px-8 py-3.5 bg-gradient-to-r from-[#9e332d] to-[#b3443d] hover:from-[#882823] hover:to-[#9e332d] text-white rounded-full font-serif-vintage text-lg font-bold tracking-wide shadow-lg hover:shadow-xl active:scale-95 transition-all flex items-center gap-2 mx-auto">
+        <svg class="w-5 h-5 fill-current animate-ping" viewBox="0 0 24 24"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>
+        <span>Lanza un deseo por nuestro Amor</span>
+      </button>
+
+      <!-- Pequeño mensaje de estado flotante que aparece temporalmente -->
+      <div id="toastMessage" class="fixed bottom-6 left-1/2 -translate-x-1/2 bg-[#482e21] text-[#faede1] px-5 py-2.5 rounded-full text-xs font-medium shadow-2xl opacity-0 pointer-events-none transition-opacity duration-300 z-50">
+        ¡Mensaje enviado con amor!
+      </div>
+    </footer>
+
+  </main>
+
+  <!-- Modal para ver fotos en grande con su historia -->
+  <div id="photoModal" class="fixed inset-0 bg-black/70 backdrop-blur-xs hidden items-center justify-center p-4 z-50">
+    <div class="bg-[#fefcf9] border border-[#e5d5c0] rounded-xl max-w-lg w-full p-6 shadow-2xl relative animate-scaleUp">
+      <button id="closePhotoModalBtn" class="absolute top-4 right-4 text-[#755541] hover:text-black text-xl font-bold p-1">
+        &times;
+      </button>
+      <div class="w-full aspect-[4/3] rounded bg-stone-100 overflow-hidden mb-4">
+        <img id="modalImg" src="" alt="Recuerdo" class="w-full h-full object-cover">
+      </div>
+      <h3 id="modalTitle" class="text-2xl font-serif-vintage font-bold text-[#452818]"></h3>
+      <p id="modalDate" class="text-xs text-[#8f6d55] font-typewriter mt-0.5 mb-3"></p>
+      <p id="modalDesc" class="text-sm text-[#4e3729] leading-relaxed font-serif-vintage text-base"></p>
+    </div>
+  </div>
+
+  <script>
+    // --- 1. CONFIGURACIÓN DE FECHA DE ANIVERSARIO & CONTADOR EN VIVO ---
+    // Puedes ajustar esta fecha al día exacto en que comenzaron su relación:
+    // Formato: AÑO, MES (0 indexado: 0 = Ene, 9 = Oct), DÍA, HORA, MINUTO
+    const anniversaryStartDate = new Date(2025, 9, 12, 18, 0, 0); // Ejemplo: 12 de Octubre de 2025
+
+    function updateLiveCounter() {
+      const now = new Date();
+      const differenceMs = now - anniversaryStartDate;
+
+      if (differenceMs < 0) {
+        // En caso de que la fecha sea futura
+        document.getElementById('counter-days').innerText = "0";
+        document.getElementById('counter-hours').innerText = "00";
+        document.getElementById('counter-minutes').innerText = "00";
+        document.getElementById('counter-seconds').innerText = "00";
+        return;
+      }
+
+      const totalSeconds = Math.floor(differenceMs / 1000);
+      const days = Math.floor(totalSeconds / (3600 * 24));
+      const hours = Math.floor((totalSeconds % (3600 * 24)) / 3600);
+      const minutes = Math.floor((totalSeconds % 3600) / 60);
+      const seconds = totalSeconds % 60;
+
+      document.getElementById('counter-days').innerText = days;
+      document.getElementById('counter-hours').innerText = String(hours).padStart(2, '0');
+      document.getElementById('counter-minutes').innerText = String(minutes).padStart(2, '0');
+      document.getElementById('counter-seconds').innerText = String(seconds).padStart(2, '0');
+    }
+
+    setInterval(updateLiveCounter, 1000);
+    updateLiveCounter();
+
+    // Notificación Toast auxiliar
+    function showToast(msg) {
+      const toast = document.getElementById('toastMessage');
+      toast.innerText = msg;
+      toast.classList.remove('opacity-0', 'pointer-events-none');
+      toast.classList.add('opacity-100');
+      setTimeout(() => {
+        toast.classList.remove('opacity-100');
+        toast.classList.add('opacity-0', 'pointer-events-none');
+      }, 3500);
+    }
+
+    // --- 2. CARTA INTERACTIVA ---
+    const waxSeal = document.getElementById('waxSealBtn');
+    const letterContent = document.getElementById('letterContent');
+    const toggleLetterEdit = document.getElementById('toggleLetterEditBtn');
+    const letterEditForm = document.getElementById('letterEditForm');
+    const saveLetterBtn = document.getElementById('saveLetterBtn');
+    const letterCustomInput = document.getElementById('letterCustomInput');
+
+    waxSeal.addEventListener('click', () => {
+      if (letterContent.classList.contains('hidden')) {
+        letterContent.classList.remove('hidden');
+        waxSeal.classList.add('scale-90', 'opacity-60');
+        showToast("Carta abierta con amor 💌");
+      } else {
+        letterContent.classList.add('hidden');
+        waxSeal.classList.remove('scale-90', 'opacity-60');
+      }
+    });
+
+    toggleLetterEdit.addEventListener('click', () => {
+      letterEditForm.classList.toggle('hidden');
+    });
+
+    saveLetterBtn.addEventListener('click', () => {
+      const newText = letterCustomInput.value.trim();
+      if (newText) {
+        // Guarda en localStorage para que no se pierda al recargar
+        localStorage.setItem('my_anniversary_letter', newText);
+        showToast("¡Tu carta personalizada se ha guardado!");
+        letterEditForm.classList.add('hidden');
+      }
+    });
+
+    // Cargar carta personalizada si existiera en localStorage
+    const savedLetter = localStorage.getItem('my_anniversary_letter');
+    if (savedLetter) {
+      // Si el usuario ya guardó una personalizada previamente
+      const textContainer = letterContent.querySelector('.space-y-4');
+      if (textContainer) {
+        textContainer.innerHTML = `<p class="whitespace-pre-line">${savedLetter}</p>`;
+      }
+    }
+
+    // --- 3. DATOS DE FOTOS & MODAL ---
+    const photosData = [
+      {
+        title: "El día que todo comenzó",
+        date: "12 de Octubre • El café de la esquina",
+        desc: "Estábamos nerviosos, pedimos dos cafés y nos quedamos hablando hasta que cerraron el lugar. Recuerdo tu sonrisa tímida y la certeza inmediata de que no quería que esa tarde terminara nunca.",
+        url: "https://images.unsplash.com/photo-1516589178581-6cd7833ae3b2?q=80&w=800&auto=format&fit=crop"
+      },
+      {
+        title: "Nuestra primera escapada",
+        date: "Febrero • Perdidos en la carretera",
+        desc: "Nos equivocamos tres veces de salida en la autopista y cantamos a todo volumen toda la tarde. Compramos comida en una gasolinera y fue más divertido que el restaurante más fino.",
+        url: "https://images.unsplash.com/photo-1469854523086-cc02fe5d8800?q=80&w=800&auto=format&fit=crop"
+      },
+      {
+        title: "Cocinar sin quemar nada",
+        date: "Mayo • Noche de pasta en casa",
+        desc: "Llenamos la cocina entera de harina, bailamos en calcetines con música de fondo y la salsa nos quedó deliciosa. Esas tardes simples contigo son las que más atesoro.",
+        url: "https://images.unsplash.com/photo-1518199266791-5375a83190b7?q=80&w=800&auto=format&fit=crop"
+      }
+    ];
+
+    function openPhotoModal(index) {
+      const data = photosData[index];
+      if (!data) return;
+      document.getElementById('modalImg').src = data.url;
+      document.getElementById('modalTitle').innerText = data.title;
+      document.getElementById('modalDate').innerText = data.date;
+      document.getElementById('modalDesc').innerText = data.desc;
+      const modal = document.getElementById('photoModal');
+      modal.classList.remove('hidden');
+      modal.classList.add('flex');
+    }
+
+    document.getElementById('closePhotoModalBtn').addEventListener('click', () => {
+      const modal = document.getElementById('photoModal');
+      modal.classList.add('hidden');
+      modal.classList.remove('flex');
+    });
+
+    // Formulario para agregar fotos
+    const addMemoryBtn = document.getElementById('addMemoryTriggerBtn');
+    const addPhotoForm = document.getElementById('addPhotoForm');
+    const submitNewPhotoBtn = document.getElementById('submitNewPhotoBtn');
+
+    addMemoryBtn.addEventListener('click', () => {
+      addPhotoForm.classList.toggle('hidden');
+    });
+
+    submitNewPhotoBtn.addEventListener('click', () => {
+      const title = document.getElementById('newPhotoTitle').value || "Momento Inolvidable";
+      const date = document.getElementById('newPhotoDate').value || "Fecha Especial";
+      const url = document.getElementById('newPhotoUrl').value || "https://images.unsplash.com/photo-1529333166437-7750a6dd5a70?q=80&w=800&auto=format&fit=crop";
+      const desc = document.getElementById('newPhotoDesc').value || "Un recuerdo lleno de amor.";
+
+      photosData.push({ title, date, desc, url });
+      
+      const newCard = document.createElement('article');
+      newCard.className = "polaroid-card p-4 rounded-sm rotate-[1deg] flex flex-col justify-between cursor-pointer group";
+      newCard.onclick = () => openPhotoModal(photosData.length - 1);
+      newCard.innerHTML = `
+        <div class="w-full aspect-[4/3] bg-amber-50 overflow-hidden rounded-xs relative">
+          <img src="${url}" alt="${title}" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" onerror="this.src='https://placehold.co/600x400/faeee0/553322?text=Nuestra+Foto'">
+          <span class="absolute top-2 right-2 bg-black/60 text-white text-[10px] px-2 py-0.5 rounded-full font-typewriter">Nuevo</span>
+        </div>
+        <div class="pt-4 pb-1 text-center">
+          <h3 class="font-handwriting text-2xl text-[#392419]">${title}</h3>
+          <p class="text-xs text-[#82614b] font-typewriter mt-0.5">${date}</p>
+          <p class="text-xs text-[#523e31] mt-2 line-clamp-2 italic">${desc}</p>
+        </div>
+      `;
+      document.getElementById('polaroidGrid').appendChild(newCard);
+      addPhotoForm.classList.add('hidden');
+      showToast("¡Nuevo recuerdo Polaroid añadido!");
+    });
+
+    // --- 4. REPRODUCTOR DE MÚSICA AMBIENTAL Y TONOS ACÚSTICOS ---
+    // Usamos Web Audio API nativo para sintetizar acordes suaves nostálgicos al interactuar
+    let audioCtx = null;
+
+    function getAudioContext() {
+      if (!audioCtx) {
+        audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+      }
+      if (audioCtx.state === 'suspended') {
+        audioCtx.resume();
+      }
+      return audioCtx;
+    }
+
+    function playSweetChime(freq = 440) {
+      try {
+        const ctx = getAudioContext();
+        const osc = ctx.createOscillator();
+        const gain = ctx.createGain();
+
+        osc.type = 'sine';
+        osc.frequency.setValueAtTime(freq, ctx.currentTime);
+
+        // envolvente suave
+        gain.gain.setValueAtTime(0.001, ctx.currentTime);
+        gain.gain.exponentialRampToValueAtTime(0.2, ctx.currentTime + 0.08);
+        gain.gain.exponentialRampToValueAtTime(0.0001, ctx.currentTime + 1.6);
+
+        osc.connect(gain);
+        gain.connect(ctx.destination);
+
+        osc.start();
+        osc.stop(ctx.currentTime + 1.7);
+      } catch (e) {
+        console.warn("Audio Context aún no iniciado por gesto del usuario", e);
+      }
+    }
+
+    // Botones de las canciones de la playlist
+    document.querySelectorAll('.play-song-btn').forEach(btn => {
+      btn.addEventListener('click', (e) => {
+        const freq = parseFloat(btn.getAttribute('data-frequency')) || 440;
+        const title = btn.getAttribute('data-title');
+        playSweetChime(freq);
+        document.getElementById('nowPlayingText').innerText = `Reproduciendo acorde de: ${title} ♪`;
+        showToast(`Sintonizando nota de: ${title} 🎶`);
+      });
+    });
+
+    // Botón de música superior
+    let isAmbientPlaying = false;
+    let ambientInterval = null;
+    const musicBtn = document.getElementById('musicToggleBtn');
+    const musicLabel = document.getElementById('musicLabel');
+
+    musicBtn.addEventListener('click', () => {
+      isAmbientPlaying = !isAmbientPlaying;
+      if (isAmbientPlaying) {
+        musicLabel.innerText = "Sonando...";
+        showToast("Música ambiental suave iniciada ✨");
+        // Melodía suave en arpegio nostálgico
+        const notes = [261.63, 329.63, 392.00, 523.25, 392.00, 329.63];
+        let noteIndex = 0;
+        ambientInterval = setInterval(() => {
+          playSweetChime(notes[noteIndex]);
+          noteIndex = (noteIndex + 1) % notes.length;
+        }, 1200);
+      } else {
+        musicLabel.innerText = "Nuestra Canción";
+        clearInterval(ambientInterval);
+        showToast("Música pausada");
+      }
+    });
+
+    // --- 5. CUPONES DE AMOR & CÁPSULA DEL TIEMPO ---
+    document.querySelectorAll('.redeem-btn').forEach(btn => {
+      btn.addEventListener('click', function() {
+        this.classList.remove('bg-[#8c2d28]', 'hover:bg-[#6c221e]');
+        this.classList.add('bg-emerald-700', 'text-white', 'cursor-default');
+        this.innerText = "¡Canjeado! ✓";
+        this.disabled = true;
+        showToast("¡Vale canjeado! Tienes una cita pendiente conmigo ❤️");
+      });
+    });
+
+    document.getElementById('openCapsuleAttemptBtn').addEventListener('click', () => {
+      showToast("🔒 ¡Paciencia mi amor! Esta cápsula solo se abre en el 2º Aniversario.");
+    });
+
+    // --- 6. LLUVIA DE CORAZONES Y CONFETI (CELEBRACIÓN) ---
+    document.getElementById('celebrateBtn').addEventListener('click', () => {
+      createHeartExplosion();
+      playSweetChime(523.25);
+      showToast("¡Deseo lanzado al universo! Por mil años más a tu lado 🥂✨");
+    });
+
+    function createHeartExplosion() {
+      const symbols = ['❤️', '💖', '✨', '🌸', '💫'];
+      for (let i = 0; i < 28; i++) {
+        const heart = document.createElement('div');
+        heart.innerText = symbols[Math.floor(Math.random() * symbols.length)];
+        heart.style.position = 'fixed';
+        heart.style.left = '50%';
+        heart.style.top = '70%';
+        heart.style.fontSize = `${Math.random() * 20 + 16}px`;
+        heart.style.pointerEvents = 'none';
+        heart.style.zIndex = '999';
+        heart.style.transition = 'transform 1.8s cubic-bezier(0.25, 1, 0.5, 1), opacity 1.8s ease';
+        
+        document.body.appendChild(heart);
+
+        const angle = Math.random() * Math.PI * 2;
+        const velocity = Math.random() * 260 + 100;
+        const destX = Math.cos(angle) * velocity;
+        const destY = Math.sin(angle) * velocity - 150;
+
+        setTimeout(() => {
+          heart.style.transform = `translate(${destX}px, ${destY}px) scale(1.3) rotate(${Math.random() * 90 - 45}deg)`;
+          heart.style.opacity = '0';
+        }, 16);
+
+        setTimeout(() => {
+          heart.remove();
+        }, 2000);
+      }
+    }
+
+    // --- 7. PARTÍCULAS / LUCIÉRNAGAS FLOTANTES DE FONDO (CANVAS) ---
+    const canvas = document.getElementById('particles-canvas');
+    const ctx = canvas.getContext('2d');
+    let width = (canvas.width = window.innerWidth);
+    let height = (canvas.height = window.innerHeight);
+
+    window.addEventListener('resize', () => {
+      width = canvas.width = window.innerWidth;
+      height = canvas.height = window.innerHeight;
+    });
+
+    const particles = [];
+    const particleCount = 28;
+
+    for (let i = 0; i < particleCount; i++) {
+      particles.push({
+        x: Math.random() * width,
+        y: Math.random() * height,
+        radius: Math.random() * 2 + 1,
+        vx: (Math.random() - 0.5) * 0.4,
+        vy: -Math.random() * 0.5 - 0.2,
+        alpha: Math.random() * 0.6 + 0.2,
+        pulseSpeed: Math.random() * 0.02 + 0.01
+      });
+    }
+
+    function animateParticles() {
+      ctx.clearRect(0, 0, width, height);
+
+      particles.forEach(p => {
+        p.x += p.vx;
+        p.y += p.vy;
+        p.alpha += Math.sin(Date.now() * p.pulseSpeed) * 0.01;
+
+        if (p.y < 0) p.y = height + 10;
+        if (p.x < 0) p.x = width + 10;
+        if (p.x > width + 10) p.x = -10;
+
+        ctx.beginPath();
+        ctx.arc(p.x, p.y, p.radius, 0, Math.PI * 2);
+        ctx.fillStyle = `rgba(180, 130, 80, ${Math.max(0.1, Math.min(0.7, p.alpha))})`;
+        ctx.fill();
+      });
+
+      requestAnimationFrame(animateParticles);
+    }
+
+    animateParticles();
+  </script>
+</body>
+</html>
