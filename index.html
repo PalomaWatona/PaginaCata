@@ -99,16 +99,7 @@
   <!-- Canvas para luciérnagas y destellos dorados -->
   <canvas id="particles-canvas"></canvas>
 
-  <!-- Barra de utilidades flotante superior (Reproductor de música sutil & Estado) -->
-  <div class="fixed top-4 right-4 sm:top-6 sm:right-6 z-50 flex items-center gap-3">
-    <!-- Botón reproductor de música sutil con sintetizador Tone.js o audio -->
-    <button id="musicToggleBtn" class="flex items-center gap-2.5 px-4 py-2 bg-white/90 backdrop-blur-md border border-[#e2d5c3] shadow-md rounded-full text-xs sm:text-sm font-medium text-[#5c4033] hover:bg-[#fffcf7] hover:shadow-lg transition-all active:scale-95">
-      <span id="musicIcon" class="inline-block animate-pulse text-amber-700">
-        <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 fill-current" viewBox="0 0 24 24"><path d="M12 3v10.55c-.59-.34-1.27-.55-2-.55-2.21 0-4 1.79-4 4s1.79 4 4 4 4-1.79 4-4V7h4V3h-6z"/></svg>
-      </span>
-      <span id="musicLabel">Nuestra Canción</span>
-    </button>
-  </div>
+  
 
   <!-- Contenedor Principal -->
   <main class="relative z-10 max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-12 md:py-20 flex flex-col gap-24 sm:gap-32">
@@ -230,7 +221,7 @@
       <div class="text-center mb-12">
         <span class="text-xs uppercase tracking-widest text-[#93725b] font-bold">Pequeños recuerdos</span>
         <h2 class="text-3xl sm:text-4xl font-serif-vintage font-bold text-[#442718]">Momentos que marcaron un antes y un después</h2>
-        <p class="text-sm text-[#745743] mt-1 font-typewriter">Pasa el mouse por las fotos para revivir la anécdota de ese día</p>
+        <p class="text-sm text-[#745743] mt-1 font-typewriter">Hazle click a las fotos para revivir la anécdota de ese día</p>
       </div>
 
       <!-- Grid de Polaroids -->
@@ -239,12 +230,12 @@
         <!-- Polaroid 1 -->
         <article class="polaroid-card p-4 rounded-sm rotate-[-2deg] flex flex-col justify-between cursor-pointer group" onclick="openPhotoModal(0)">
           <div class="w-full aspect-[4/3] bg-amber-50 overflow-hidden rounded-xs relative">
-            <img src="https://images.unsplash.com/photo-1516589178581-6cd7833ae3b2?q=80&w=800&auto=format&fit=crop" alt="Nuestra primera cita" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
-            <span class="absolute top-2 right-2 bg-black/60 text-white text-[10px] px-2 py-0.5 rounded-full font-typewriter">Día 1</span>
+            <img src="fotos/parque quinta normal.jpg" alt="Nuestra primera cita" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+            <span class="absolute top-2 right-2 bg-black/60 text-white text-[10px] px-2 py-0.5 rounded-full font-typewriter">Día 0</span>
           </div>
           <div class="pt-4 pb-1 text-center">
             <h3 class="font-handwriting text-2xl text-[#392419]">El día que todo comenzó</h3>
-            <p class="text-xs text-[#82614b] font-typewriter mt-0.5">4 de Octubre &bull; Parque Quinta Normal</p>
+            <p class="text-xs text-[#82614b] font-typewriter mt-0.5">16 de Agosto &bull; Parque Quinta Normal</p>
             <p class="text-xs text-[#523e31] mt-2 line-clamp-2 italic">Estábamos nerviosos, a punto de juntarnos en el terminal tur bus para una tarde de picnic</p>
           </div>
         </article>
@@ -252,26 +243,26 @@
         <!-- Polaroid 2 -->
         <article class="polaroid-card p-4 rounded-sm rotate-[1.5deg] flex flex-col justify-between cursor-pointer group" onclick="openPhotoModal(1)">
           <div class="w-full aspect-[4/3] bg-amber-50 overflow-hidden rounded-xs relative">
-            <img src="https://images.unsplash.com/photo-1469854523086-cc02fe5d8800?q=80&w=800&auto=format&fit=crop" alt="Nuestro primer viaje" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
-            <span class="absolute top-2 right-2 bg-black/60 text-white text-[10px] px-2 py-0.5 rounded-full font-typewriter">Mes 4</span>
+            <img src="fotos/foto popeta.jpeg" alt="Nuestro primer viaje" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+            <span class="absolute top-2 right-2 bg-black/60 text-white text-[10px] px-2 py-0.5 rounded-full font-typewriter">Mes 0</span>
           </div>
           <div class="pt-4 pb-1 text-center">
-            <h3 class="font-handwriting text-2xl text-[#392419]">Nuestra primera escapada</h3>
-            <p class="text-xs text-[#82614b] font-typewriter mt-0.5">Febrero &bull; Perdidos en la carretera</p>
-            <p class="text-xs text-[#523e31] mt-2 line-clamp-2 italic">Nos equivocamos tres veces de salida en la autopista y cantamos a todo volumen toda la tarde.</p>
+            <h3 class="font-handwriting text-2xl text-[#392419]">El día en el que oficializamos</h3>
+            <p class="text-xs text-[#82614b] font-typewriter mt-0.5">4 de Octubre &bull; En algún lugar de Popenca</p>
+            <p class="text-xs text-[#523e31] mt-2 line-clamp-2 italic">Salimos a dar una vuelta en bicicleta con un resultado que no te esperabas</p>
           </div>
         </article>
 
         <!-- Polaroid 3 -->
         <article class="polaroid-card p-4 rounded-sm rotate-[-1deg] flex flex-col justify-between cursor-pointer group" onclick="openPhotoModal(2)">
           <div class="w-full aspect-[4/3] bg-amber-50 overflow-hidden rounded-xs relative">
-            <img src="https://images.unsplash.com/photo-1518199266791-5375a83190b7?q=80&w=800&auto=format&fit=crop" alt="Tarde de risas" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
-            <span class="absolute top-2 right-2 bg-black/60 text-white text-[10px] px-2 py-0.5 rounded-full font-typewriter">Mes 7</span>
+            <img src="fotos/foto kidzania.jpeg" alt="Tarde de risas" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+            <span class="absolute top-2 right-2 bg-black/60 text-white text-[10px] px-2 py-0.5 rounded-full font-typewriter">Mes 4</span>
           </div>
           <div class="pt-4 pb-1 text-center">
-            <h3 class="font-handwriting text-2xl text-[#392419]">Cocinar sin quemar nada</h3>
-            <p class="text-xs text-[#82614b] font-typewriter mt-0.5">Mayo &bull; Noche de pasta en casa</p>
-            <p class="text-xs text-[#523e31] mt-2 line-clamp-2 italic">Llenamos la cocina de harina, pero la salsa nos quedó como de restaurante con estrella Michelin.</p>
+            <h3 class="font-handwriting text-2xl text-[#392419]">Salida a Kidzania</h3>
+            <p class="text-xs text-[#82614b] font-typewriter mt-0.5">14 de Febrero &bull; Nuestro primer 14 F juntitos</p>
+            <p class="text-xs text-[#523e31] mt-2 line-clamp-2 italic">Me dijiste que tenías planeada la salida para nuestro primer 14 de Febrero pero que era sorpresa.</p>
           </div>
         </article>
 
@@ -300,7 +291,7 @@
     <!-- SECCIÓN 4: LÍNEA DE TIEMPO (EL VIAJE DE NUESTROS 12 MESES) -->
     <section>
       <div class="text-center mb-12">
-        <span class="text-xs uppercase tracking-widest text-[#93725b] font-bold">12 Capítulos Inolvidables</span>
+        <span class="text-xs uppercase tracking-widest text-[#93725b] font-bold">Capítulos Inolvidables de Nuestra Historia Juntos</span>
         <h2 class="text-3xl sm:text-4xl font-serif-vintage font-bold text-[#442718]">El Camino de Nuestros 12 Meses</h2>
         <p class="text-sm text-[#745743] mt-1 font-typewriter">Un hito especial por cada mes que hemos compartido</p>
       </div>
@@ -398,7 +389,7 @@
 
     <!-- SECCIÓN 6: CANCIONES QUE ME RECUERDAN A TI -->
     <section>
-      <div class="text-center mb-10">
+      <div class="text-center mb-10"> 
         <span class="text-xs uppercase tracking-widest text-[#93725b] font-bold">Nuestra Banda Sonora</span>
         <h2 class="text-3xl sm:text-4xl font-serif-vintage font-bold text-[#442718]">Canciones que Me Llevan a Ti</h2>
         <p class="text-sm text-[#745743] mt-1 font-typewriter">Cada melodía tiene grabada una mirada o un recuerdo tuyo</p>
@@ -625,21 +616,21 @@
     const photosData = [
       {
         title: "El día que todo comenzó",
-        date: "12 de Octubre • El café de la esquina",
-        desc: "Estábamos nerviosos, pedimos dos cafés y nos quedamos hablando hasta que cerraron el lugar. Recuerdo tu sonrisa tímida y la certeza inmediata de que no quería que esa tarde terminara nunca.",
-        url: "https://images.unsplash.com/photo-1516589178581-6cd7833ae3b2?q=80&w=800&auto=format&fit=crop"
+        date: "16 de Agosto • Parque Quinta Normal",
+        desc: "Estábamos nerviosos, a punto de juntarnos para conocernos por primera vez después de un tiempo hablando por mensajes. Fue un dia maravilloso, todo fluyó, hubo muchas risas y momentos lindos. Y cómo olvidar que pisé mierda 3 veces... Siempre voy a pensar que eso me dio buena suerte y por eso estamos juntitos ahora.",
+        url: "fotos/parque quinta normal.jpg"
       },
       {
-        title: "Nuestra primera escapada",
-        date: "Febrero • Perdidos en la carretera",
-        desc: "Nos equivocamos tres veces de salida en la autopista y cantamos a todo volumen toda la tarde. Compramos comida en una gasolinera y fue más divertido que el restaurante más fino.",
-        url: "https://images.unsplash.com/photo-1469854523086-cc02fe5d8800?q=80&w=800&auto=format&fit=crop"
+        title: "El día en el que oficializamos",
+        date: "4 de Octubre • En algún lugar de Popenca",
+        desc: "Ya nos conociamos mejor, cada vez nos gustabamos más y más, los momentos lindos y chistosos no dejaban de aumentar y ya estaba comenzando a sentir cosas más intensas por ti, si que decidí pedirte pololeo. Siento que ha sido uno de los días más lindos de mi vida, lástima que por ansioso te pedí pololeo antes de llegar al lugar donde tenía planeado hacerlo pero shhhhh",
+        url: "fotos/foto popeta.jpeg"
       },
       {
-        title: "Cocinar sin quemar nada",
-        date: "Mayo • Noche de pasta en casa",
-        desc: "Llenamos la cocina entera de harina, bailamos en calcetines con música de fondo y la salsa nos quedó deliciosa. Esas tardes simples contigo son las que más atesoro.",
-        url: "https://images.unsplash.com/photo-1518199266791-5375a83190b7?q=80&w=800&auto=format&fit=crop"
+        title: "Salida a Kidzania",
+        date: "14 de Febrero • Nuestro primer 14 F juntitos",
+        desc: "Para nuestro primer 14 de Febrero juntos me dijiste que me tenías una sorpresa y que no me ibas a decir hasta llegar al lugar. No sé cuantas veces te habré cateteado para que me dijeras a donde ibamos a ir y no me decías, me tenías muerto de ansiedad aAaAaAaA. Qué iba a saber yo que te ibas a acordar que en alguuuuuun momento te había mencionado que siempre había querido ir a Kidzania y me ibas a hacer posible ese sueño esa noche.",
+        url: "fotos/foto kidzania.jpeg"
       }
     ];
 
@@ -697,79 +688,7 @@
       showToast("¡Nuevo recuerdo Polaroid añadido!");
     });
 
-    // --- 4. REPRODUCTOR DE MÚSICA AMBIENTAL Y TONOS ACÚSTICOS ---
-    // Usamos Web Audio API nativo para sintetizar acordes suaves nostálgicos al interactuar
-    let audioCtx = null;
-
-    function getAudioContext() {
-      if (!audioCtx) {
-        audioCtx = new (window.AudioContext || window.webkitAudioContext)();
-      }
-      if (audioCtx.state === 'suspended') {
-        audioCtx.resume();
-      }
-      return audioCtx;
-    }
-
-    function playSweetChime(freq = 440) {
-      try {
-        const ctx = getAudioContext();
-        const osc = ctx.createOscillator();
-        const gain = ctx.createGain();
-
-        osc.type = 'sine';
-        osc.frequency.setValueAtTime(freq, ctx.currentTime);
-
-        // envolvente suave
-        gain.gain.setValueAtTime(0.001, ctx.currentTime);
-        gain.gain.exponentialRampToValueAtTime(0.2, ctx.currentTime + 0.08);
-        gain.gain.exponentialRampToValueAtTime(0.0001, ctx.currentTime + 1.6);
-
-        osc.connect(gain);
-        gain.connect(ctx.destination);
-
-        osc.start();
-        osc.stop(ctx.currentTime + 1.7);
-      } catch (e) {
-        console.warn("Audio Context aún no iniciado por gesto del usuario", e);
-      }
-    }
-
-    // Botones de las canciones de la playlist
-    document.querySelectorAll('.play-song-btn').forEach(btn => {
-      btn.addEventListener('click', (e) => {
-        const freq = parseFloat(btn.getAttribute('data-frequency')) || 440;
-        const title = btn.getAttribute('data-title');
-        playSweetChime(freq);
-        document.getElementById('nowPlayingText').innerText = `Reproduciendo acorde de: ${title} ♪`;
-        showToast(`Sintonizando nota de: ${title} 🎶`);
-      });
-    });
-
-    // Botón de música superior
-    let isAmbientPlaying = false;
-    let ambientInterval = null;
-    const musicBtn = document.getElementById('musicToggleBtn');
-    const musicLabel = document.getElementById('musicLabel');
-
-    musicBtn.addEventListener('click', () => {
-      isAmbientPlaying = !isAmbientPlaying;
-      if (isAmbientPlaying) {
-        musicLabel.innerText = "Sonando...";
-        showToast("Música ambiental suave iniciada ✨");
-        // Melodía suave en arpegio nostálgico
-        const notes = [261.63, 329.63, 392.00, 523.25, 392.00, 329.63];
-        let noteIndex = 0;
-        ambientInterval = setInterval(() => {
-          playSweetChime(notes[noteIndex]);
-          noteIndex = (noteIndex + 1) % notes.length;
-        }, 1200);
-      } else {
-        musicLabel.innerText = "Nuestra Canción";
-        clearInterval(ambientInterval);
-        showToast("Música pausada");
-      }
-    });
+    
 
     // --- 5. CUPONES DE AMOR & CÁPSULA DEL TIEMPO ---
     document.querySelectorAll('.redeem-btn').forEach(btn => {
